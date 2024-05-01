@@ -26,7 +26,7 @@ public class OnClick : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            testLobby.ListLobbies();
+            testLobby.JoinLobby();
         }
     }
 }
