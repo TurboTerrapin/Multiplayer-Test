@@ -50,16 +50,14 @@ public class TestLobby : MonoBehaviour
     }
 
 
-    public async void CreateLobby()
+    public async void CreateLobby(string lobbyName, int maxPlayers, bool privateLobby)
     {
         try
         {
-            string lobbyName = "MyLobby";
-            int maxPlayers = 4;
 
             CreateLobbyOptions options = new CreateLobbyOptions
             {
-                IsPrivate = false,
+                IsPrivate = privateLobby,
                 Player = GetPlayer(),
             };
 

@@ -18,7 +18,7 @@ public class OnClick : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            testLobby.CreateLobby();
+            //testLobby.CreateLobby();
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -26,7 +26,7 @@ public class OnClick : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            testLobby.QuickJoinLobby();
+            //testLobby.QuickJoinLobby();
         }
     }
 }
