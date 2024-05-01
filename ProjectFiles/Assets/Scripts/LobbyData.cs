@@ -14,31 +14,16 @@ public class LobbyData : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playersText;
     [SerializeField] private TextMeshProUGUI gameModeText;
     [SerializeField] private TextMeshProUGUI lobbyCodeText;
+    [SerializeField] private TextMeshProUGUI mapText;
 
-    public TestLobby testLobby;
     private float timer;
 
-    private void Awake()
+    public void UpdateLobby(Lobby lobby)
     {
-        
-    }
-
-    private void Update()
-    {
-        UpdateLobby();
-    }
-
-    public void UpdateLobby()
-    {
-        if (timer < 0f)
-        {
-            Lobby lobby = testLobby.GetLobby();
-            lobbyNameText.text = lobby.Name;
-            playersText.text = lobby.Players.Count + "/" + lobby.MaxPlayers;
-            gameModeText.text = lobby.Data["GameMode"].Value;
-            lobbyCodeText.text = lobby.LobbyCode;
-            timer = 1.3f;
-        }
-        timer -= Time.deltaTime;
+        lobbyNameText.text = lobby.Name;
+        playersText.text = lobby.Players.Count + "/" + lobby.MaxPlayers;
+        gameModeText.text = lobby.Data["GameMode"].Value;
+        lobbyCodeText.text = lobby.LobbyCode;
+        mapText.text = lobby.Data["Map"].Value;
     }
 }

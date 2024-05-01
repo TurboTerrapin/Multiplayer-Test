@@ -10,6 +10,10 @@ public class TestLobby : MonoBehaviour
 {
     public static TestLobby Instance { get; private set; }
 
+    [SerializeField]
+    private LobbyData lobbyData;
+
+
     private Lobby hostLobby;
     private Lobby joinedLobby;
     private float heartbeatTimer;
@@ -33,7 +37,7 @@ public class TestLobby : MonoBehaviour
         };
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-        playerName = "John" + Random.Range(1, 100);
+        playerName = "PLayer" + Random.Range(1, 100);
         Debug.Log(playerName);
     }
 
@@ -54,6 +58,7 @@ public class TestLobby : MonoBehaviour
                 lobbyUpdateTimer = lobbyUpdateTimerMax;
 
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
+                lobbyData.UpdateLobby(lobby);
                 joinedLobby = lobby;
             }
         }
@@ -222,7 +227,7 @@ public class TestLobby : MonoBehaviour
         }
     }
 
-    private async void UpdatePlayerName(string newName)
+    public async void UpdatePlayerName(string newName)
     {
         try
         {
