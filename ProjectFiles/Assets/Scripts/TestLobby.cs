@@ -12,6 +12,8 @@ public class TestLobby : MonoBehaviour
 
     [SerializeField]
     private LobbyData lobbyData;
+    [SerializeField]
+    private PlayerList playerList;
 
 
     private Lobby hostLobby;
@@ -59,6 +61,7 @@ public class TestLobby : MonoBehaviour
 
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
                 lobbyData.UpdateLobby(lobby);
+                playerList.updateList(lobby.Players);
                 joinedLobby = lobby;
             }
         }
