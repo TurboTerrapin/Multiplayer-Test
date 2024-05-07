@@ -13,7 +13,7 @@ public class TestRelay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetRegions();
     }
 
     public async void CreateRelay()
@@ -25,9 +25,8 @@ public class TestRelay : MonoBehaviour
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
             Debug.Log("Created Relay! " + allocation.Key + allocation.Region);
-
-
-        } catch (RelayServiceException e)
+        }
+        catch (RelayServiceException e)
         {
             Debug.Log(e);
         }
@@ -45,4 +44,31 @@ public class TestRelay : MonoBehaviour
             Debug.Log(e);
         }
     }
+
+    public async void LeaveRelay()
+    {
+        try
+        {
+            //await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
+            //RelayService.Instance.
+            //hostLobby = null;
+            //joinedLobby = null;
+        }
+        catch (RelayServiceException e)
+        {
+            Debug.Log(e);
+        }
+    }
+    public async void GetRegions()
+    {
+        try
+        {
+            Debug.Log(await RelayService.Instance.ListRegionsAsync());
+        }
+        catch (RelayServiceException e)
+        {
+            Debug.Log(e);
+        }
+    }
+
 }

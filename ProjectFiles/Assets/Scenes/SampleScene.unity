@@ -1871,6 +1871,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbyData: {fileID: 1809836386}
   playerList: {fileID: 1348411289}
+  relay: {fileID: 1827421771}
 --- !u!4 &556812357
 Transform:
   m_ObjectHideFlags: 0
@@ -6711,7 +6712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9261f6dfed6c4f945ab166cfc3ffde43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbySize: 10
+  lobbySize: 4
 --- !u!4 &1827421772
 Transform:
   m_ObjectHideFlags: 0
