@@ -178,6 +178,8 @@ public class TestLobby : MonoBehaviour
             Debug.Log("Joined Lobby with code " + lobbyCode);
 
             PrintPlayers(lobby);
+
+            relay.JoinRelay(lobbyCode);
         }
         catch (LobbyServiceException e)
         {
