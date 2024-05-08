@@ -1,6 +1,7 @@
 com.unity.collab-proxy@2.3.1
 com.unity.connect.share@4.2.3
 com.unity.feature.development@1.0.2
+com.unity.multiplayer.tools@1.1.1
 com.unity.netcode.gameobjects@1.8.1
 com.unity.services.lobby@1.2.1
 com.unity.services.relay@1.0.5

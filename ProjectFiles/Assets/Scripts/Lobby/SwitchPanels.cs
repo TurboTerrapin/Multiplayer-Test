@@ -7,6 +7,8 @@ using TMPro;
 public class SwitchPanels : MonoBehaviour
 {
     public GameObject[] panels;
+    [SerializeField]
+    private int startingPanel;
 
     void Start()
     {
@@ -14,7 +16,7 @@ public class SwitchPanels : MonoBehaviour
         {
             panel.SetActive(false);
         }
-        panels[0].SetActive(true);
+        panels[startingPanel].SetActive(true);
     }
 
     //ID of 0 is the find lobby panel
