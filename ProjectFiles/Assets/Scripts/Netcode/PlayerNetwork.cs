@@ -24,19 +24,20 @@ public class PlayerNetwork : NetworkBehaviour
     void Update()
     {
 
-        Debug.Log(OwnerClientId + "; " + randomNumber.Value);
+        //Debug.Log(OwnerClientId + "; " + randomNumber.Value);
 
         if (!IsOwner)
         {
             return;
         }
 
+        /*
         if(Input.GetKeyDown(KeyCode.T))
         {
             randomNumber.Value = Random.Range(0, 100);
             
         }
-
+        */
 
 
         input.x = Input.GetAxis("Horizontal");
