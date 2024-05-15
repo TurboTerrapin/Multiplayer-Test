@@ -14,9 +14,8 @@ public class TestLobby : MonoBehaviour
     private LobbyData lobbyData;
     [SerializeField]
     private PlayerList playerList;
-    [SerializeField]
-    private TestRelay relay;
 
+    public string relayJoinCode;
 
     private Lobby hostLobby;
     private Lobby joinedLobby;
@@ -108,8 +107,9 @@ public class TestLobby : MonoBehaviour
 
             Debug.Log("Created Lobby! " + lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Id + " " + lobby.LobbyCode);
             PrintPlayers(hostLobby);
-            relay.lobbySize = maxPlayers - 1;
-            relay.CreateRelay();
+            TestRelay.Instance.lobbySize = maxPlayers - 1;
+            TestRelay.Instance.CreateRelay();
+
         }
         catch (LobbyServiceException e)
         {
@@ -179,7 +179,7 @@ public class TestLobby : MonoBehaviour
 
             PrintPlayers(lobby);
 
-            relay.JoinRelay(lobbyCode);
+            //TestRelay.Instance.JoinRelay(lobbyCode);
         }
         catch (LobbyServiceException e)
         {
@@ -273,36 +273,6 @@ public class TestLobby : MonoBehaviour
 
             await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, joinedLobby.Players[i].Id);
             joinedLobby = null;
-        }
-        catch (LobbyServiceException e)
-        {
-            Debug.Log(e);
-        }
-    }
-
-    public async void RefreshLobbyList()
-    {
-        try
-        {
-            QueryLobbiesOptions options = new QueryLobbiesOptions();
-            options.Count = 25;
-
-            // Filter for open lobbies only
-            options.Filters = new List<QueryFilter> {
-                new QueryFilter(
-                    field: QueryFilter.FieldOptions.AvailableSlots,
-                    op: QueryFilter.OpOptions.GT,
-                    value: "0")
-            };
-
-            // Order by newest lobbies first
-            options.Order = new List<QueryOrder> {
-                new QueryOrder(
-                    asc: false,
-                    field: QueryOrder.FieldOptions.Created)
-            };
-
-            QueryResponse lobbyListQueryResponse = await Lobbies.Instance.QueryLobbiesAsync();
         }
         catch (LobbyServiceException e)
         {

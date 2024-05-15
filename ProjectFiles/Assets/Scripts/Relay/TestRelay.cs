@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class TestRelay : MonoBehaviour
 {
+    public static TestRelay Instance { get; private set; }
 
     public int lobbySize;
 
@@ -33,6 +34,9 @@ public class TestRelay : MonoBehaviour
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
             NetworkManager.Singleton.StartHost();
+
+
+            TestLobby.Instance.relayJoinCode = joinCode;
 
             Debug.Log("Created Relay! " + joinCode + " " + allocation.AllocationId);
         }
@@ -64,7 +68,6 @@ public class TestRelay : MonoBehaviour
 
             Debug.Log("Relay Connected Successfully");
 
-            //RelayService.Instance.
         }
         catch (RelayServiceException e)
         {

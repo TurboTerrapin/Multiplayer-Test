@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class JoinPrivateLobby : MonoBehaviour
+public class JoinRelayUI : MonoBehaviour
 {
     public TMP_InputField input;
 
     public void JoinLobby()
     {
-        TestLobby.Instance.JoinLobbyByCode(input.text);
+        TestRelay.Instance.JoinRelay(input.text);
     }
-
 }
