@@ -187,25 +187,11 @@ public class TestLobby : MonoBehaviour
         }
     }
 
-    public async void JoinLobby(Lobby lobby)
-    {
-        Player player = GetPlayer();
-
-        joinedLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobby.Id, new JoinLobbyByIdOptions
-        {
-            Player = player
-        });
-    }
-
-    public async void QuickJoinLobby()
-    {
-        await LobbyService.Instance.QuickJoinLobbyAsync();
-    }
-
     private void PrintPlayers()
     {
         PrintPlayers(joinedLobby);
     }
+
     private void PrintPlayers(Lobby lobby)
     {
         Debug.Log("Players in lobby " + lobby.Name + " " + lobby.Data["GameMode"].Value + " " + lobby.Data["Map"].Value);

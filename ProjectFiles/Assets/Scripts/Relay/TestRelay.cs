@@ -23,12 +23,13 @@ public class TestRelay : MonoBehaviour
     {
         try
         {
+
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(lobbySize);
 
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
+            RelayServerData relayServerData = new RelayServerData(allocation, "wss");
 
-            RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
             NetworkManager.Singleton.StartHost();
@@ -45,17 +46,23 @@ public class TestRelay : MonoBehaviour
     {
         try
         {
-            Debug.Log("Joining relay with " + joinCode);
+            Debug.Log("Joining relay with " + joinCode + " j e j ");
 
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
-            RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
+            Debug.Log("Here 1");
+
+            RelayServerData relayServerData = new RelayServerData(joinAllocation, "wss");
+
+            Debug.Log("Here 2");
 
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
+            Debug.Log("Here 3");
+
             NetworkManager.Singleton.StartClient();
 
-            
+            Debug.Log("Relay Connected Successfully");
 
             //RelayService.Instance.
         }
