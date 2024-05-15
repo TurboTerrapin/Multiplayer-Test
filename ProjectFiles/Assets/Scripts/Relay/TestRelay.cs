@@ -36,8 +36,7 @@ public class TestRelay : MonoBehaviour
 
             NetworkManager.Singleton.StartHost();
 
-
-            TestLobby.Instance.relayJoinCode = joinCode;
+            TestLobby.Instance.UpdateRelayCode(joinCode);
 
             Debug.Log("Created Relay! " + joinCode + " " + allocation.AllocationId);
         }
@@ -55,15 +54,9 @@ public class TestRelay : MonoBehaviour
 
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
-            Debug.Log("Here 1");
-
             RelayServerData relayServerData = new RelayServerData(joinAllocation, "wss");
 
-            Debug.Log("Here 2");
-
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-
-            Debug.Log("Here 3");
 
             NetworkManager.Singleton.StartClient();
 

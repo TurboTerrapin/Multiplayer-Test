@@ -100,7 +100,8 @@ public class TestLobby : MonoBehaviour
                 Data = new Dictionary<string, DataObject>
                 {
                     { "GameMode", new DataObject(DataObject.VisibilityOptions.Public, "TeamDeathMatch", DataObject.IndexOptions.S1) },
-                    { "Map", new DataObject(DataObject.VisibilityOptions.Public, "Default", DataObject.IndexOptions.S2) }
+                    { "Map", new DataObject(DataObject.VisibilityOptions.Public, "Default", DataObject.IndexOptions.S2) },
+                    { "RelayCode", new DataObject(DataObject.VisibilityOptions.Member, "Default") }
                 },
             };
 
@@ -183,7 +184,7 @@ public class TestLobby : MonoBehaviour
 
             PrintPlayers(lobby);
 
-            //TestRelay.Instance.JoinRelay(lobbyCode);
+            TestRelay.Instance.JoinRelay(joinedLobby.Data["RelayCode"].Value);
         }
         catch (LobbyServiceException e)
         {
@@ -245,14 +246,18 @@ public class TestLobby : MonoBehaviour
             Debug.Log(e);
         }
     }
-
-    public async void LeaveLobby()
+    public async void UpdateRelayCode(string newCode)
     {
         try
         {
-            await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
-            hostLobby = null;
-            joinedLobby = null;
+            relayJoinCode = newCode;
+            hostLobby = await Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions
+            {
+                Data = new Dictionary<string, DataObject>
+            {
+                {"RelayCode", new DataObject(DataObject.VisibilityOptions.Member, relayJoinCode) },
+            }
+            });
         }
         catch (LobbyServiceException e)
         {
@@ -260,22 +265,12 @@ public class TestLobby : MonoBehaviour
         }
     }
 
-    public async void KickPlayer(string playerName)
+    public async void LeaveLobby()
     {
         try
         {
-            int i = 1;
-            foreach(Player player in joinedLobby.Players)
-            {
-                if (player.Data["PlayerName"].Value == playerName)
-                {
-                    break;
-                }
-                i++;
-            }
-
-
-            await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, joinedLobby.Players[i].Id);
+            await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
+            hostLobby = null;
             joinedLobby = null;
         }
         catch (LobbyServiceException e)
