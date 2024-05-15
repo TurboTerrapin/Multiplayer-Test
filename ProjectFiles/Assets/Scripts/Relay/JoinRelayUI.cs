@@ -7,7 +7,7 @@ public class JoinRelayUI : MonoBehaviour
 {
     public TMP_InputField input;
 
-    public void JoinLobby()
+    public void JoinRelay()
     {
         TestRelay.Instance.JoinRelay(input.text);
     }
