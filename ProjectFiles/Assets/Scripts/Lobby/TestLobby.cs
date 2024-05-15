@@ -41,7 +41,7 @@ public class TestLobby : MonoBehaviour
         };
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-        playerName = "PLayer" + Random.Range(1, 100);
+        playerName = "Player" + Random.Range(1, 100);
         Debug.Log(playerName);
     }
 
@@ -58,7 +58,7 @@ public class TestLobby : MonoBehaviour
             lobbyUpdateTimer -= Time.deltaTime;
             if (lobbyUpdateTimer < 0f)
             {
-                float lobbyUpdateTimerMax = 1.1f;
+                float lobbyUpdateTimerMax = 1.2f;
                 lobbyUpdateTimer = lobbyUpdateTimerMax;
 
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);

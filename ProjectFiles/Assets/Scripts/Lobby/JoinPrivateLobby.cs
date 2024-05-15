@@ -11,7 +11,9 @@ public class JoinPrivateLobby : MonoBehaviour
 
     public void JoinLobby()
     {
-        testLobby.JoinLobbyByCode(input.text);
+        string joinCode = input.text.Substring(0, 6);
+
+        testLobby.JoinLobbyByCode(joinCode);
     }
 
 }

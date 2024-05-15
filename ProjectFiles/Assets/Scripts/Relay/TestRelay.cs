@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
+using Unity.Networking.Transport.Relay;
 using UnityEngine;
 
 public class TestRelay : MonoBehaviour
@@ -24,7 +27,13 @@ public class TestRelay : MonoBehaviour
 
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
-            Debug.Log("Created Relay! " + allocation.Key + allocation.Region);
+
+            RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+
+            NetworkManager.Singleton.StartHost();
+
+            Debug.Log("Created Relay! " + joinCode + " " + allocation.AllocationId);
         }
         catch (RelayServiceException e)
         {
@@ -36,9 +45,17 @@ public class TestRelay : MonoBehaviour
     {
         try
         {
-            await RelayService.Instance.JoinAllocationAsync(joinCode);
-
             Debug.Log("Joining relay with " + joinCode);
+
+            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
+
+            RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
+
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+
+            NetworkManager.Singleton.StartClient();
+
+            
 
             //RelayService.Instance.
         }
@@ -48,6 +65,7 @@ public class TestRelay : MonoBehaviour
         }
     }
 
+    /*
     public async void LeaveRelay()
     {
         try
@@ -62,6 +80,7 @@ public class TestRelay : MonoBehaviour
             Debug.Log(e);
         }
     }
+    */
     public async void GetRegions()
     {
         try
