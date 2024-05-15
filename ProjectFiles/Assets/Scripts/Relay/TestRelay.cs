@@ -6,6 +6,7 @@ using Unity.Services.Relay.Models;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
+using Unity.Services.Authentication;
 using UnityEngine;
 
 public class TestRelay : MonoBehaviour
@@ -80,7 +81,7 @@ public class TestRelay : MonoBehaviour
     {
         try
         {
-            //await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
+            await NetworkManager.Singleton.DisconnectClient(AuthenticationService.Instance.PlayerId);
             //RelayService.Instance.
             //hostLobby = null;
             //joinedLobby = null;
