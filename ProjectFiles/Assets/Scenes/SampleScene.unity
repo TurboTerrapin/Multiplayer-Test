@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 40919617}
   - component: {fileID: 40919616}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: RelayInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6366,7 +6366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35e380287680c64789eb72f4508ee9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 0}
+  input: {fileID: 40919616}
 --- !u!1 &1827421770
 GameObject:
   m_ObjectHideFlags: 0
