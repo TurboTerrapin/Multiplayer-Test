@@ -15,6 +15,9 @@ public class TestLobby : MonoBehaviour
     [SerializeField]
     private PlayerList playerList;
 
+
+    public TestRelay testRelay;
+
     public string relayJoinCode;
 
     private Lobby hostLobby;
@@ -27,6 +30,7 @@ public class TestLobby : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        //testRelay = TestRelay.Instance;
     }
 
     // Start is called before the first frame update
@@ -107,8 +111,8 @@ public class TestLobby : MonoBehaviour
 
             Debug.Log("Created Lobby! " + lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Id + " " + lobby.LobbyCode);
             PrintPlayers(hostLobby);
-            TestRelay.Instance.lobbySize = maxPlayers - 1;
-            TestRelay.Instance.CreateRelay();
+            testRelay.lobbySize = maxPlayers - 1;
+            testRelay.CreateRelay();
 
         }
         catch (LobbyServiceException e)
